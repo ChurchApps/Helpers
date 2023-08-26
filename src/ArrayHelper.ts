@@ -1,9 +1,11 @@
+import { UniqueIdHelper } from "./UniqueIdHelper";
+
 export class ArrayHelper {
   static getIds(array: any[], propertyName: string) {
     const result: string[] = [];
     for (const item of array) {
       const id = item[propertyName]?.toString();
-      if (id && result.indexOf(id) === -1) result.push(id);
+      if (!UniqueIdHelper.isMissing(id) && result.indexOf(id) === -1) result.push(id);
     }
     return result;
   }
