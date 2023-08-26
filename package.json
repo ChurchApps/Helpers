@@ -1,0 +1,32 @@
+{
+  "name": "@churchapps/helpers",
+  "private":true,
+  "version": "1.0.0",
+  "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
+  "main": "dist/index.js",
+
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rimraf dist",
+    "tsc": "tsc",
+    "build": "npm-run-all clean tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LiveChurchSolutions/Helpers.git"
+  },
+  "keywords": [
+    "ChurchApps"
+  ],
+  "author": "ChurchApps.org",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LiveChurchSolutions/Helpers/issues"
+  },
+  "homepage": "https://github.com/LiveChurchSolutions/Helpers#readme",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2"
+  }
+}
