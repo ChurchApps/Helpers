@@ -3,6 +3,11 @@ import { CommonEnvironmentHelper } from "./CommonEnvironmentHelper";
 
 export class PersonHelper {
 
+  public static getPhotoPath(churchId: string, person: any) {
+    if (!person.photoUpdated) return "";
+    else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + person.photoUpdated.getTime().toString();
+  }
+
   static getPhotoUrl(person: PersonInterface) {
     if (!person?.photo) return "/images/sample-profile.png"
     else return person?.photo?.startsWith("data:image/png;base64,") ? person.photo : CommonEnvironmentHelper.ContentRoot + person.photo;
@@ -16,6 +21,11 @@ export class PersonHelper {
       return years + " years";
     }
     else return "";
+  }
+
+  public static getDisplayNameFromPerson(person: any) {
+    if (person?.name?.nick !== null && person?.name?.nick !== "" && person?.name?.nick !== undefined) return person.name.first + " \"" + person.name.nick + "\" " + person.name.last;
+    else return person.name.first + " " + person.name.last;
   }
 
   static getDisplayName(firstName: string, lastName: string, nickName: string): string {
