@@ -1,4 +1,5 @@
 import { format as dateFormat } from "date-fns"
+import dayjs from "dayjs"
 
 export class DateHelper {
 
@@ -105,4 +106,17 @@ export class DateHelper {
       return dateFormat(date, format);
     } catch { return ""; }
   }
+
+  public static toMysqlDate(d: Date) {
+    if (d === null || d === undefined) {
+        return undefined;
+    }
+    return dayjs(d).format("YYYY-MM-DD HH:mm:ss")
+  }
+
+  public static subtractHoursFromNow(hour: number) {
+      const now = new Date();
+      return new Date(now.setHours(now.getHours() - hour));
+  }
+
 }
