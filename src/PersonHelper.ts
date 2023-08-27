@@ -33,6 +33,11 @@ export class PersonHelper {
     else return firstName + " " + lastName;
   }
 
+  public static getBirthMonth(birthdate: Date): number {
+    if (birthdate) return new Date(birthdate).getMonth() + 1;
+    else return -1;
+  }
+
   public static compareAddress(address1: ContactInfoInterface, address2: ContactInfoInterface): boolean {
     const displayAddress1: string = this.addressToString(address1).trim();
     const displayAddress2: string = this.addressToString(address2).trim();
