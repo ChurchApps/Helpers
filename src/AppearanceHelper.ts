@@ -20,7 +20,7 @@ export class AppearanceHelper {
       return appearanceSettings?.favicon_16x16;
     }
 
-    return;
+    return null;
   }
 
   public static getLogo(appearanceSettings: AppearanceInterface, defaultLogoLight: string, defaultLogoDark: string, backgroundColor: string) {

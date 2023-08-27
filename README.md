@@ -10,4 +10,6 @@ Library of helper functions not specific to any project or framework.
 
 ## To Publish
 
-1. Run `npm publish --access=public`
+1. Update version number in package.json
+2. Run `npm run build`
+3. Run `npm publish --access=public`
