@@ -1,4 +1,4 @@
-
+export * from "./interfaces";
 export { ApiHelper } from "./ApiHelper";
 export { AppearanceHelper } from "./AppearanceHelper";
 export { ArrayHelper } from "./ArrayHelper";
@@ -9,3 +9,4 @@ export { PersonHelper } from "./PersonHelper"
 export { UserHelper } from "./UserHelper";
 export { UniqueIdHelper } from "./UniqueIdHelper";
 export { DonationHelper } from "./DonationHelper";
+
