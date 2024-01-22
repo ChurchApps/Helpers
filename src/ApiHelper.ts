@@ -5,6 +5,8 @@ export class ApiHelper {
 
   static apiConfigs: ApiConfig[] = [];
   static isAuthenticated = false;
+  static onRequest: (url:string, requestOptions:any) => void;
+  static onError: (url:string, requestOptions:any, error: any) => void;
 
   static getConfig(keyName: string) {
     let result: ApiConfig = null;
@@ -74,11 +76,13 @@ export class ApiHelper {
       method: "DELETE",
       headers: { Authorization: "Bearer " + config.jwt }
     };
+    if (this.onRequest) this.onRequest(config.url + path, requestOptions);
     try {
       const response = await fetch(config.url + path, requestOptions);
       if (!response.ok) await this.throwApiError(response);
     } catch (e) {
-      console.log(e)
+      console.log(e);
+      if (this.onError) this.onError(config.url + path, requestOptions, e);
       throw (e);
     }
   }
@@ -95,6 +99,7 @@ export class ApiHelper {
   }
 
   static async fetchWithErrorHandling(url: string, requestOptions: any) {
+    if (this.onRequest) this.onRequest(url, requestOptions);
     try {
       const response = await fetch(url, requestOptions);
       if (!response.ok) await this.throwApiError(response);
@@ -111,7 +116,6 @@ export class ApiHelper {
   }
 
   private static async throwApiError(response: Response) {
-    console.log("THROW API ERROR");
     let msg = response.statusText;
     try {
       const json = await response.json();
