@@ -118,6 +118,9 @@ export class ApiHelper {
   private static async throwApiError(response: Response) {
     let msg = response.statusText;
     try {
+      msg = await response.text();
+    } catch {}
+    try {
       const json = await response.json();
       msg = json.errors[0];
     } catch { }
