@@ -21,4 +21,4 @@ export interface UserChurchInterface { id?: string, userId?: string, churchId?: 
 
 export interface ApiConfig { keyName: string, url: string, jwt: string, permisssions: RolePermissionInterface[] }
 export type ApiListType = "MembershipApi" | "AttendanceApi" | "GivingApi" | "DoingApi" | "MessagingApi" | "LessonsApi" | "ReportingApi" | "ContentApi";
-export interface IPermission { api: string, contentType: string, action: string }
+export interface IApiPermission { api: string, contentType: string, action: string }
