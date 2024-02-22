@@ -84,7 +84,7 @@ export class ArrayHelper {
   static getAllOperatorArray(array: any[], propertyName: string, values: any[], operator: string, dataType = "string") {
     const result: any[] = [];
     values.forEach(v => {
-      const filtered = this.getAllOperator(array, propertyName, v, operator.replace("notIn", "notEqual").replace("in", "equals").replace("donatedToAny", "equals").replace("donatedTo", "equals").replace("attenedCampus", "equals").replace("attenedAny", "equals"), dataType);
+      const filtered = this.getAllOperator(array, propertyName, v, operator.replace("notIn", "notEqual").replace("in", "equals").replace("donatedToAny", "equals").replace("donatedTo", "equals").replace("attenedCampus", "equals").replace("attenedAny", "equals").replace("attenedService", "equals"), dataType);
       filtered.forEach(f => result.push(f));
     })
     return result;
