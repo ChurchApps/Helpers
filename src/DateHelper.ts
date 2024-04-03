@@ -43,6 +43,12 @@ export class DateHelper {
     return result;
   }
 
+  static getNextSunday() {
+    let result = this.getLastSunday();
+    result.setDate(result.getDate() + 7);
+    return result;
+  }
+
   static getWeekSunday(year: number, week: number) {
     let result = new Date(year, 0, 1);
     while (result.getDay() !== 0) result.setDate(result.getDate() + 1);
