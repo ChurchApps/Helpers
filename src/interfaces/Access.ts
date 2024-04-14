@@ -6,7 +6,7 @@ export interface DomainInterface { id?: string, domainName?: string }
 export interface RegisterChurchRequestInterface extends ChurchInterface { appName?: string }
 export interface LoadCreateUserRequestInterface { userEmail: string, fromEmail?: string, subject?: string, body?: string, firstName: string, lastName: string }
 export interface LoginResponseInterface { user: UserInterface, userChurches: LoginUserChurchInterface[], errors: string[] }
-export interface LoginUserChurchInterface { person: PersonInterface, church: ChurchInterface, apis: ApiInterface[], jwt: string, groups: { id: string, name: string, leader:boolean }[] }
+export interface LoginUserChurchInterface { person: PersonInterface, church: ChurchInterface, apis: ApiInterface[], jwt: string, groups: { id: string, tags:string, name: string, leader:boolean }[] }
 
 export interface PermissionInterface { apiName?: string, section?: string, action?: string, displaySection?: string, displayAction?: string }
 export interface RegisterUserInterface { firstName?: string, lastName: string, email?: string, appName: string, appUrl: string }
