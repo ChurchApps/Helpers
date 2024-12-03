@@ -1,5 +1,7 @@
 import { format as dateFormat } from "date-fns"
 import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 export class DateHelper {
 
@@ -123,6 +125,10 @@ export class DateHelper {
   public static subtractHoursFromNow(hour: number) {
       const now = new Date();
       return new Date(now.setHours(now.getHours() - hour));
+  }
+
+  public static toUTCDate(d: Date) {
+    return dayjs(d).utc().format("YYYY-MM-DD HH:mm:ss");
   }
 
 }
