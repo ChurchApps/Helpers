@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export class FileHelper {
 
   static postPresignedFile = (presigned: any, uploadedFile: File, progressCallback: (percent: number) => void) => {
@@ -10,14 +8,36 @@ export class FileHelper {
     for (const property in presigned.fields) formData.append(property, presigned.fields[property]);
     formData.append("file", uploadedFile);
 
-    const axiosConfig = {
-      headers: { "Content-Type": "multipart/form-data" },
-      onUploadProgress: (data: any) => {
-        progressCallback(Math.round((100 * data.loaded) / data.total));
-      }
-    };
+    // Use XMLHttpRequest for upload progress tracking since fetch doesn't support it natively
+    return new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
 
-    return axios.post(presigned.url, formData, axiosConfig);
+      xhr.upload.addEventListener('progress', (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          progressCallback(percent);
+        }
+      });
+
+      xhr.addEventListener('load', () => {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          resolve({
+            status: xhr.status,
+            statusText: xhr.statusText,
+            data: xhr.responseText
+          });
+        } else {
+          reject(new Error(`HTTP Error: ${xhr.status} ${xhr.statusText}`));
+        }
+      });
+
+      xhr.addEventListener('error', () => {
+        reject(new Error('Network error occurred'));
+      });
+
+      xhr.open('POST', presigned.url);
+      xhr.send(formData);
+    });
   };
 
   static dataURLtoBlob(dataurl: string) {
