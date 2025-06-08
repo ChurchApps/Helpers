@@ -13,7 +13,11 @@ export class PersonHelper {
 
   static getPhotoUrl(person: PersonInterface) {
     if (!person?.photo) return "/images/sample-profile.png"
-    else return person?.photo?.startsWith("data:image/png;base64,") ? person.photo : CommonEnvironmentHelper.ContentRoot + person.photo;
+    else {
+      return (person?.photo?.startsWith("data:image/png;base64,") || person.photo?.indexOf("://") > -1)
+        ? person.photo
+        : CommonEnvironmentHelper.ContentRoot + person.photo;
+    }
   }
 
   static getAge(birthdate: Date): string {
