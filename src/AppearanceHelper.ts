@@ -35,15 +35,15 @@ export class AppearanceHelper {
     let g = 0;
     let b = 0;
 
-    if (backgroundColor.match(/#[0-9a-fA-F{6}]/)) {
-      r = this.getHexValue(backgroundColor.substring(1, 2));
-      g = this.getHexValue(backgroundColor.substring(3, 4));
-      b = this.getHexValue(backgroundColor.substring(5, 6));
+    if (backgroundColor.match(/#[0-9a-fA-F]{6}/)) {
+      r = this.getHexValue(backgroundColor.substring(1, 3));
+      g = this.getHexValue(backgroundColor.substring(3, 5));
+      b = this.getHexValue(backgroundColor.substring(5, 7));
       valid = true;
-    } else if (backgroundColor.match(/#[0-9a-fA-F{3}]/)) {
-      r = this.getHexValue(backgroundColor.substring(1, 1));
-      g = this.getHexValue(backgroundColor.substring(2, 2));
-      b = this.getHexValue(backgroundColor.substring(3, 3));
+    } else if (backgroundColor.match(/#[0-9a-fA-F]{3}/)) {
+      r = this.getHexValue(backgroundColor.substring(1, 2));
+      g = this.getHexValue(backgroundColor.substring(2, 3));
+      b = this.getHexValue(backgroundColor.substring(3, 4));
       valid = true;
     }
 

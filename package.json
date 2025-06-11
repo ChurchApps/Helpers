@@ -1,13 +1,16 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
     "tsc": "tsc",
-    "build": "npm-run-all clean tsc"
+    "build": "npm-run-all clean tsc",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts"
   },
   "repository": {
     "type": "git",
@@ -22,9 +25,19 @@
     "url": "https://github.com/LiveChurchSolutions/Helpers/issues"
   },
   "homepage": "https://github.com/LiveChurchSolutions/Helpers#readme",
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "devDependencies": {
-    "@types/node": "^22.15.21",
-    "npm-run-all": "^4.1.5",
+    "@types/node": "^24.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.2.1",
+    "npm-run-all2": "^8.0.4",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   },

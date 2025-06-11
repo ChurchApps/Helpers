@@ -52,7 +52,8 @@ export class ArrayHelper {
     else {
       let obj = item;
       for (let i = 0; i < propChain.length - 1; i++) {
-        if (obj) obj = item[propChain[i]];
+        if (obj && obj[propChain[i]] !== undefined) obj = obj[propChain[i]];
+        else return false;
       }
       return obj[propChain[propChain.length - 1]] === value;
     }

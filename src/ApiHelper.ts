@@ -18,7 +18,7 @@ export class ApiHelper {
   static setDefaultPermissions(jwt: string) {
     this.apiConfigs.forEach(config => {
       config.jwt = jwt;
-      config.permisssions = [];
+      config.permissions = [];
     });
     this.isAuthenticated = true;
   }
@@ -27,19 +27,20 @@ export class ApiHelper {
     this.apiConfigs.forEach(config => {
       if (config.keyName === keyName) {
         config.jwt = jwt;
-        config.permisssions = permissions;
+        config.permissions = permissions;
       }
     });
     this.isAuthenticated = true;
   }
 
   static clearPermissions() {
-    this.apiConfigs.forEach(config => { config.jwt = ""; config.permisssions = []; });
+    this.apiConfigs.forEach(config => { config.jwt = ""; config.permissions = []; });
     this.isAuthenticated = false;
   }
 
   static async get(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = { method: "GET", headers: { Authorization: "Bearer " + config.jwt } };
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
@@ -52,6 +53,7 @@ export class ApiHelper {
 
   static async post(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
       method: "POST",
       headers: { Authorization: "Bearer " + config.jwt, "Content-Type": "application/json" },
@@ -62,6 +64,7 @@ export class ApiHelper {
 
   static async patch(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
       method: "PATCH",
       headers: { Authorization: "Bearer " + config.jwt, "Content-Type": "application/json" },
@@ -72,6 +75,7 @@ export class ApiHelper {
 
   static async delete(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
       method: "DELETE",
       headers: { Authorization: "Bearer " + config.jwt }
@@ -94,7 +98,6 @@ export class ApiHelper {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     };
-    console.log(config.url + path, requestOptions);
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 

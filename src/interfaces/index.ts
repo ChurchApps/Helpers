@@ -2,7 +2,6 @@ export * from "./Error";
 export * from "./UserContextInterface";
 export * from "./Permissions";
 
-
 // API interfaces
 export * from "./Access";
 export * from "./Attendance";

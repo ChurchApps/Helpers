@@ -41,8 +41,12 @@ export class FileHelper {
   };
 
   static dataURLtoBlob(dataurl: string) {
-    let arr = dataurl.split(","), mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    let arr = dataurl.split(",");
+    if (arr.length < 2) throw new Error("Invalid data URL format");
+    let mimeMatch = arr[0].match(/:(.*?);/);
+    if (!mimeMatch) throw new Error("Invalid MIME type in data URL");
+    let mime = mimeMatch[1];
+    let bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }
