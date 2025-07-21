@@ -1,24 +1,19 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.0.43",
+  "version": "1.0.44",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
-  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
+    ".": "./dist/index.js",
     "./interfaces": "./dist/interfaces/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
     "tsc": "tsc",
-    "build": "npm-run-all clean tsc build-cjs",
-    "build-cjs": "node scripts/build-cjs.js",
+    "build": "npm-run-all clean tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts"
