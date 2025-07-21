@@ -1,7 +1,16 @@
 import { format as dateFormat } from "date-fns"
 import dayjs from "dayjs"
-import utc from "dayjs/plugin/utc";
-dayjs.extend(utc);
+
+// Use dynamic import for ES module compatibility with dayjs plugins
+const loadUtcPlugin = async () => {
+  const utc = await import("dayjs/plugin/utc");
+  dayjs.extend((utc as any).default || utc);
+};
+
+// Initialize the plugin
+loadUtcPlugin().catch(() => {
+  console.warn("Could not load dayjs UTC plugin");
+});
 
 export class DateHelper {
 

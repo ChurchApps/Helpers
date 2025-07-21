@@ -1,21 +1,29 @@
 import { ApiConfig, RolePermissionInterface, ApiListType } from "./interfaces";
 import { ErrorHelper } from "./ErrorHelper";
 
-export class ApiHelper {
+// Global singleton pattern to ensure single instance across all packages
+declare global {
+  interface Window {
+    __CHURCHAPPS_API_HELPER__?: ApiHelperClass;
+  }
+  var __CHURCHAPPS_API_HELPER__: ApiHelperClass | undefined;
+}
 
-  static apiConfigs: ApiConfig[] = [];
-  static isAuthenticated = false;
-  static onRequest: (url:string, requestOptions:any) => void;
-  static onError: (url:string, requestOptions:any, error: any) => void;
+class ApiHelperClass {
 
-  static getConfig(keyName: string) {
+  apiConfigs: ApiConfig[] = [];
+  isAuthenticated = false;
+  onRequest: (url:string, requestOptions:any) => void;
+  onError: (url:string, requestOptions:any, error: any) => void;
+
+  getConfig(keyName: string) {
     let result: ApiConfig = null;
     this.apiConfigs.forEach(config => { if (config.keyName === keyName) result = config });
     //if (result === null) throw new Error("Unconfigured API: " + keyName);
     return result;
   }
 
-  static setDefaultPermissions(jwt: string) {
+  setDefaultPermissions(jwt: string) {
     this.apiConfigs.forEach(config => {
       config.jwt = jwt;
       config.permissions = [];
@@ -23,7 +31,7 @@ export class ApiHelper {
     this.isAuthenticated = true;
   }
 
-  static setPermissions(keyName: string, jwt: string, permissions: RolePermissionInterface[]) {
+  setPermissions(keyName: string, jwt: string, permissions: RolePermissionInterface[]) {
     this.apiConfigs.forEach(config => {
       if (config.keyName === keyName) {
         config.jwt = jwt;
@@ -33,25 +41,25 @@ export class ApiHelper {
     this.isAuthenticated = true;
   }
 
-  static clearPermissions() {
+  clearPermissions() {
     this.apiConfigs.forEach(config => { config.jwt = ""; config.permissions = []; });
     this.isAuthenticated = false;
   }
 
-  static async get(path: string, apiName: ApiListType) {
+  async get(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = { method: "GET", headers: { Authorization: "Bearer " + config.jwt } };
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 
-  static async getAnonymous(path: string, apiName: ApiListType) {
+  async getAnonymous(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     const requestOptions = { method: "GET" };
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 
-  static async post(path: string, data: any[] | {}, apiName: ApiListType) {
+  async post(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
@@ -62,7 +70,7 @@ export class ApiHelper {
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 
-  static async patch(path: string, data: any[] | {}, apiName: ApiListType) {
+  async patch(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
@@ -73,7 +81,7 @@ export class ApiHelper {
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 
-  static async delete(path: string, apiName: ApiListType) {
+  async delete(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
@@ -91,7 +99,7 @@ export class ApiHelper {
     }
   }
 
-  static async postAnonymous(path: string, data: any[] | {}, apiName: ApiListType) {
+  async postAnonymous(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
     const requestOptions = {
       method: "POST",
@@ -101,7 +109,7 @@ export class ApiHelper {
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
 
-  static async fetchWithErrorHandling(url: string, requestOptions: any) {
+  async fetchWithErrorHandling(url: string, requestOptions: any) {
     if (this.onRequest) this.onRequest(url, requestOptions);
     try {
       const response = await fetch(url, requestOptions);
@@ -118,7 +126,7 @@ export class ApiHelper {
     }
   }
 
-  private static async throwApiError(response: Response) {
+  private async throwApiError(response: Response) {
     let msg = response.statusText;
     try {
       msg = await response.text();
@@ -133,3 +141,36 @@ export class ApiHelper {
   }
 
 }
+
+// Force singleton with immediate global assignment
+const getGlobalObject = () => {
+  if (typeof window !== 'undefined') return window;
+  if (typeof global !== 'undefined') return global;
+  if (typeof globalThis !== 'undefined') return globalThis;
+  return {};
+};
+
+// Get or create singleton immediately - FORCE SINGLE INSTANCE
+const ensureSingleton = () => {
+  const globalObj = getGlobalObject() as any;
+  
+  // Use a more unique key to avoid conflicts
+  const SINGLETON_KEY = '__CHURCHAPPS_API_HELPER_SINGLETON__';
+  
+  // ALWAYS create a new instance and overwrite any existing one
+  // This ensures the latest module load wins
+  if (!globalObj[SINGLETON_KEY]) {
+    globalObj[SINGLETON_KEY] = new ApiHelperClass();
+    console.log('🔧 ApiHelper SINGLETON created (new instance)');
+  } else {
+    console.log('🔄 ApiHelper SINGLETON already exists - using existing (configs:', globalObj[SINGLETON_KEY].apiConfigs.length, ')');
+  }
+  
+  return globalObj[SINGLETON_KEY];
+};
+
+// Export the singleton instance
+export const ApiHelper = ensureSingleton();
+
+// Also export the class for type usage
+export type { ApiHelperClass };

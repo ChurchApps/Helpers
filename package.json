@@ -1,8 +1,15 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.0.40",
+  "version": "1.0.42",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
+  "type": "module",
   "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./interfaces": "./dist/interfaces/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
