@@ -129,7 +129,8 @@ export type ApiListType =
   | "MessagingApi"
   | "LessonsApi"
   | "ReportingApi"
-  | "ContentApi";
+  | "ContentApi"
+  | "AskApi";
 export interface IApiPermission {
   api: string;
   contentType: string;
