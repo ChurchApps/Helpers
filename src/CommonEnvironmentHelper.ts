@@ -18,6 +18,7 @@ export class CommonEnvironmentHelper {
 
   static init = (stage: string) => {
     switch (stage) {
+      case "demo": CommonEnvironmentHelper.initDemo(); break;
       case "staging": CommonEnvironmentHelper.initStaging(); break;
       case "prod": CommonEnvironmentHelper.initProd(); break;
       default: CommonEnvironmentHelper.initDev(); break;
@@ -41,6 +42,25 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.B1Root = process.env.REACT_APP_B1_ROOT || process.env.NEXT_PUBLIC_B1_ROOT || CommonEnvironmentHelper.B1Root;
     CommonEnvironmentHelper.ChumsRoot = process.env.REACT_APP_CHUMS_ROOT || process.env.NEXT_PUBLIC_CHUMS_ROOT || CommonEnvironmentHelper.ChumsRoot;
     CommonEnvironmentHelper.LessonsRoot = process.env.REACT_APP_LESSONS_ROOT || process.env.NEXT_PUBLIC_LESSONS_ROOT || CommonEnvironmentHelper.LessonsRoot;
+  }
+
+  //NOTE: None of these values are secret.
+  static initDemo = () => {
+    CommonEnvironmentHelper.AttendanceApi = "https://attendanceapi.demo.churchapps.org";
+    CommonEnvironmentHelper.DoingApi = "https://doingapi.demo.churchapps.org";
+    CommonEnvironmentHelper.GivingApi = "https://givingapi.demo.churchapps.org";
+    CommonEnvironmentHelper.MembershipApi = "https://membershipapi.demo.churchapps.org";
+    CommonEnvironmentHelper.ReportingApi = "https://reportingapi.demo.churchapps.org";
+    CommonEnvironmentHelper.MessagingApi = "https://messagingapi.demo.churchapps.org";
+    CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.demo.churchapps.org";
+    CommonEnvironmentHelper.ContentApi = "https://contentapi.demo.churchapps.org";
+    CommonEnvironmentHelper.AskApi = "https://askapi.demo.churchapps.org";
+    CommonEnvironmentHelper.GoogleAnalyticsTag = "";
+
+    CommonEnvironmentHelper.ContentRoot = "https://content.demo.churchapps.org";
+    CommonEnvironmentHelper.B1Root = "https://{key}.demo.b1.church";
+    CommonEnvironmentHelper.ChumsRoot = "https://app.demo.chums.org";
+    CommonEnvironmentHelper.LessonsRoot = "https://demo.lessons.church";
   }
 
   //NOTE: None of these values are secret.
