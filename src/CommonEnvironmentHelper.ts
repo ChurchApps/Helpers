@@ -57,7 +57,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.AskApi = "https://askapi.demo.churchapps.org";
     CommonEnvironmentHelper.GoogleAnalyticsTag = "";
 
-    CommonEnvironmentHelper.ContentRoot = "https://content.demo.churchapps.org";
+    CommonEnvironmentHelper.ContentRoot = "https://democontent.churchapps.org";
     CommonEnvironmentHelper.B1Root = "https://{key}.demo.b1.church";
     CommonEnvironmentHelper.ChumsRoot = "https://app.demo.chums.org";
     CommonEnvironmentHelper.LessonsRoot = "https://demo.lessons.church";
