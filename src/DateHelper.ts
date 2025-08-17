@@ -1,15 +1,16 @@
-import { format as dateFormat } from "date-fns"
 import dayjs from "dayjs"
 
 // Use dynamic import for ES module compatibility with dayjs plugins
-const loadUtcPlugin = async () => {
+const loadPlugins = async () => {
   const utc = await import("dayjs/plugin/utc");
+  const customParseFormat = await import("dayjs/plugin/customParseFormat");
   dayjs.extend((utc as any).default || utc);
+  dayjs.extend((customParseFormat as any).default || customParseFormat);
 };
 
-// Initialize the plugin
-loadUtcPlugin().catch(() => {
-  console.warn("Could not load dayjs UTC plugin");
+// Initialize the plugins
+loadPlugins().catch(() => {
+  console.warn("Could not load dayjs plugins");
 });
 
 export class DateHelper {
@@ -121,7 +122,15 @@ export class DateHelper {
 
   private static formatDateTime(date: Date, format: string) {
     try {
-      return dateFormat(date, format);
+      // Convert date-fns format to dayjs format
+      const dayjsFormat = format
+        .replace(/yyyy/g, 'YYYY')
+        .replace(/yy/g, 'YY')
+        .replace(/d/g, 'D')
+        .replace(/DD/g, 'DD')
+        .replace(/a/g, 'A');
+      
+      return dayjs(date).format(dayjsFormat);
     } catch { return ""; }
   }
 

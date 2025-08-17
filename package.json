@@ -1,6 +1,6 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.0.48",
+  "version": "1.0.49",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -48,10 +48,7 @@
     "typescript": "^5.9.2"
   },
   "dependencies": {
-    "date-fns": "^4.1.0",
     "dayjs": "^1.11.13",
-    "fs-extra": "^11.3.1",
-    "react-ga4": "^2.1.0",
     "rrule": "^2.8.1"
   }
 }
