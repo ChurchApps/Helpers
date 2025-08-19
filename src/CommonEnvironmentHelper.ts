@@ -46,14 +46,14 @@ export class CommonEnvironmentHelper {
 
   //NOTE: None of these values are secret.
   static initDemo = () => {
-    CommonEnvironmentHelper.AttendanceApi = "https://attendanceapi.demo.churchapps.org";
-    CommonEnvironmentHelper.DoingApi = "https://doingapi.demo.churchapps.org";
-    CommonEnvironmentHelper.GivingApi = "https://givingapi.demo.churchapps.org";
-    CommonEnvironmentHelper.MembershipApi = "https://membershipapi.demo.churchapps.org";
-    CommonEnvironmentHelper.ReportingApi = "https://reportingapi.demo.churchapps.org";
-    CommonEnvironmentHelper.MessagingApi = "https://messagingapi.demo.churchapps.org";
-    CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.demo.churchapps.org";
-    CommonEnvironmentHelper.ContentApi = "https://contentapi.demo.churchapps.org";
+    CommonEnvironmentHelper.AttendanceApi = "https://api.demo.churchapps.org/attendance";
+    CommonEnvironmentHelper.DoingApi = "https://api.demo.churchapps.org/doing";
+    CommonEnvironmentHelper.GivingApi = "https://api.demo.churchapps.org/giving";
+    CommonEnvironmentHelper.MembershipApi = "https://api.demo.churchapps.org/membership";
+    CommonEnvironmentHelper.ReportingApi = "https://api.demo.churchapps.org/reporting";
+    CommonEnvironmentHelper.MessagingApi = "https://api.demo.churchapps.org/messaging";
+    CommonEnvironmentHelper.MessagingApiSocket = "wss://demo.churchapps.org/messaging";
+    CommonEnvironmentHelper.ContentApi = "https://api.demo.churchapps.org/content";
     CommonEnvironmentHelper.AskApi = "https://askapi.demo.churchapps.org";
     CommonEnvironmentHelper.GoogleAnalyticsTag = "";
 
@@ -65,14 +65,14 @@ export class CommonEnvironmentHelper {
 
   //NOTE: None of these values are secret.
   static initStaging = () => {
-    CommonEnvironmentHelper.AttendanceApi = "https://attendanceapi.staging.churchapps.org";
-    CommonEnvironmentHelper.DoingApi = "https://doingapi.staging.churchapps.org";
-    CommonEnvironmentHelper.GivingApi = "https://givingapi.staging.churchapps.org";
-    CommonEnvironmentHelper.MembershipApi = "https://membershipapi.staging.churchapps.org";
-    CommonEnvironmentHelper.ReportingApi = "https://reportingapi.staging.churchapps.org";
-    CommonEnvironmentHelper.MessagingApi = "https://messagingapi.staging.churchapps.org";
-    CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.staging.churchapps.org";
-    CommonEnvironmentHelper.ContentApi = "https://contentapi.staging.churchapps.org";
+    CommonEnvironmentHelper.AttendanceApi = "https://api.staging.churchapps.org/attendance";
+    CommonEnvironmentHelper.DoingApi = "https://api.staging.churchapps.org/doing";
+    CommonEnvironmentHelper.GivingApi = "https://api.staging.churchapps.org/giving";
+    CommonEnvironmentHelper.MembershipApi = "https://api.staging.churchapps.org/membership";
+    CommonEnvironmentHelper.ReportingApi = "https://api.staging.churchapps.org/reporting";
+    CommonEnvironmentHelper.MessagingApi = "https://api.staging.churchapps.org/messaging";
+    CommonEnvironmentHelper.MessagingApiSocket = "wss://staging.churchapps.org/messaging";
+    CommonEnvironmentHelper.ContentApi = "https://api.staging.churchapps.org/content";
     CommonEnvironmentHelper.AskApi = "https://askapi.staging.churchapps.org";
     CommonEnvironmentHelper.GoogleAnalyticsTag = "";
 
