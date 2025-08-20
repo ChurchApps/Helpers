@@ -84,14 +84,14 @@ export class CommonEnvironmentHelper {
 
   //NOTE: None of these values are secret.
   static initProd = () => {
-    CommonEnvironmentHelper.AttendanceApi = "https://attendanceapi.churchapps.org";
-    CommonEnvironmentHelper.DoingApi = "https://doingapi.churchapps.org";
-    CommonEnvironmentHelper.GivingApi = "https://givingapi.churchapps.org";
-    CommonEnvironmentHelper.MembershipApi = "https://membershipapi.churchapps.org";
-    CommonEnvironmentHelper.ReportingApi = "https://reportingapi.churchapps.org";
-    CommonEnvironmentHelper.MessagingApi = "https://messagingapi.churchapps.org";
+    CommonEnvironmentHelper.AttendanceApi = "https://api.churchapps.org/attendance";
+    CommonEnvironmentHelper.DoingApi = "https://api.churchapps.org/doing";
+    CommonEnvironmentHelper.GivingApi = "https://api.churchapps.org/giving";
+    CommonEnvironmentHelper.MembershipApi = "https://api.churchapps.org/membership";
+    CommonEnvironmentHelper.ReportingApi = "https://api.churchapps.org/reporting";
+    CommonEnvironmentHelper.MessagingApi = "https://api.churchapps.org/messaging";
     CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.churchapps.org";
-    CommonEnvironmentHelper.ContentApi = "https://contentapi.churchapps.org";
+    CommonEnvironmentHelper.ContentApi = "https://api.churchapps.org/content";
     CommonEnvironmentHelper.AskApi = "https://askapi.churchapps.org";
 
     CommonEnvironmentHelper.ContentRoot = "https://content.churchapps.org";
