@@ -52,7 +52,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.MembershipApi = "https://api.demo.churchapps.org/membership";
     CommonEnvironmentHelper.ReportingApi = "https://api.demo.churchapps.org/reporting";
     CommonEnvironmentHelper.MessagingApi = "https://api.demo.churchapps.org/messaging";
-    CommonEnvironmentHelper.MessagingApiSocket = "wss://demo.churchapps.org/messaging";
+    CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.demo.churchapps.org";
     CommonEnvironmentHelper.ContentApi = "https://api.demo.churchapps.org/content";
     CommonEnvironmentHelper.AskApi = "https://askapi.demo.churchapps.org";
     CommonEnvironmentHelper.GoogleAnalyticsTag = "";
@@ -71,7 +71,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.MembershipApi = "https://api.staging.churchapps.org/membership";
     CommonEnvironmentHelper.ReportingApi = "https://api.staging.churchapps.org/reporting";
     CommonEnvironmentHelper.MessagingApi = "https://api.staging.churchapps.org/messaging";
-    CommonEnvironmentHelper.MessagingApiSocket = "wss://staging.churchapps.org/messaging";
+    CommonEnvironmentHelper.MessagingApiSocket = "wss://socket.staging.churchapps.org";
     CommonEnvironmentHelper.ContentApi = "https://api.staging.churchapps.org/content";
     CommonEnvironmentHelper.AskApi = "https://askapi.staging.churchapps.org";
     CommonEnvironmentHelper.GoogleAnalyticsTag = "";
