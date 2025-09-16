@@ -139,6 +139,7 @@ export interface PersonInterface {
   conversationId?: string;
   optedOut?: boolean;
   nametagNotes?: string;
+  donorNumber?: string;
 }
 export interface QuestionInterface {
   id?: string;
