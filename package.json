@@ -13,7 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
     "tsc": "tsc",
-    "build": "npm-run-all clean tsc",
+    "build": "yarn clean && yarn tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts"
@@ -33,13 +33,14 @@
   "homepage": "https://github.com/LiveChurchSolutions/Helpers#readme",
   "engines": {
     "node": ">=20.0.0",
-    "npm": ">=10.0.0"
+    "yarn": ">=1.22.0",
+    "npm": "please-use-yarn"
   },
   "devDependencies": {
     "@types/node": "^24.5.0",
-    "@typescript-eslint/eslint-plugin": "^8.44.0",
-    "@typescript-eslint/parser": "^8.44.0",
-    "eslint": "^9.35.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
     "npm-run-all2": "^8.0.4",

@@ -8,24 +8,26 @@ This is the `@churchapps/helpers` package - a foundational TypeScript library pr
 
 ## Development Commands
 
+**This project uses Yarn exclusively. npm is disabled to prevent script execution vulnerabilities.**
+
 ```bash
-npm run clean      # Remove dist folder
-npm run tsc        # TypeScript compilation only
-npm run build      # Full build (clean + tsc)
-npm run lint       # ESLint check
-npm run lint:fix   # ESLint with auto-fix
-npm run format     # Prettier formatting
+yarn clean      # Remove dist folder
+yarn tsc        # TypeScript compilation only
+yarn build      # Full build (clean + tsc)
+yarn lint       # ESLint check
+yarn lint:fix   # ESLint with auto-fix
+yarn format     # Prettier formatting
 ```
 
 ## Local Development Workflow
 
 ```bash
 # After making changes:
-npm run build
-npm link
+yarn build
+yarn link
 
 # In consuming project:
-npm link @churchapps/helpers
+yarn link @churchapps/helpers
 
 # After further changes, repeat build + link cycle
 ```
@@ -35,9 +37,15 @@ npm link @churchapps/helpers
 ```bash
 # 1. Update version in package.json
 # 2. Build and publish:
-npm run build
-npm publish --access=public
+yarn build
+yarn publish --access=public
 ```
+
+## Security Notes
+
+- Script execution is disabled by default in `.yarnrc.yml`
+- Only whitelisted packages can run install scripts
+- npm is disabled via `.npmrc` with `engine-strict=true`
 
 ## Architecture
 
