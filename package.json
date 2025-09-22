@@ -1,19 +1,13 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.1.8",
+  "version": "1.2.3",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
   "main": "dist/index.js",
-  "module": "dist/index.js",
   "types": "dist/index.d.ts",
-  "exports": {
-    ".": "./dist/index.js",
-    "./interfaces": "./dist/interfaces/index.js"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "tsc": "tsc",
-    "build": "yarn clean && yarn tsc",
+    "build": "yarn clean && tsc",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts"
@@ -34,7 +28,7 @@
   "engines": {
     "node": ">=20.0.0",
     "yarn": ">=1.22.0",
-    "npm": "please-use-yarn"
+    "npm": ">=8.0.0"
   },
   "devDependencies": {
     "@types/node": "^24.5.0",

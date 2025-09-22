@@ -50,6 +50,7 @@ export interface PaymentMethodInterface {
   provider?: "stripe" | "paypal";
   type?: "card" | "bank" | "paypal";
   last4?: string;
+  gatewayId?: string;
 }
 export interface StripeCardUpdateInterface {
   paymentMethodId: string;
@@ -121,6 +122,7 @@ export interface SubscriptionInterface {
   default_source: string;
   plan: { amount: number; interval: string; interval_count: number };
   customer: string;
+  gatewayId?: string;
 }
 
 export interface PayPalPaymentMethodInterface {
@@ -129,6 +131,10 @@ export interface PayPalPaymentMethodInterface {
   name: string;
   last4?: string;
   email?: string;
+}
+
+export interface PayPalDonationInterface {
+  gatewayId?: string;
 }
 
 export interface PaymentGatewayInterface {
@@ -156,6 +162,7 @@ export interface MultiGatewayDonationInterface {
   };
   funds?: FundDonationInterface[];
   notes?: string;
+  gatewayId?: string;
 }
 
 export class StripePaymentMethod {
