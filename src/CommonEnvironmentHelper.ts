@@ -13,7 +13,7 @@ export class CommonEnvironmentHelper {
 
   static ContentRoot = "";
   static B1Root = "";
-  static ChumsRoot = "";
+  static B1AdminRoot = "";
   static LessonsRoot = "";
 
   static init = (stage: string) => {
@@ -40,7 +40,7 @@ export class CommonEnvironmentHelper {
 
     CommonEnvironmentHelper.ContentRoot = process.env.REACT_APP_CONTENT_ROOT || process.env.NEXT_PUBLIC_CONTENT_ROOT || CommonEnvironmentHelper.ContentRoot;
     CommonEnvironmentHelper.B1Root = process.env.REACT_APP_B1_ROOT || process.env.NEXT_PUBLIC_B1_ROOT || CommonEnvironmentHelper.B1Root;
-    CommonEnvironmentHelper.ChumsRoot = process.env.REACT_APP_CHUMS_ROOT || process.env.NEXT_PUBLIC_CHUMS_ROOT || CommonEnvironmentHelper.ChumsRoot;
+    CommonEnvironmentHelper.B1AdminRoot = process.env.REACT_APP_B1ADMIN_ROOT || process.env.NEXT_PUBLIC_B1ADMIN_ROOT || CommonEnvironmentHelper.B1AdminRoot;
     CommonEnvironmentHelper.LessonsRoot = process.env.REACT_APP_LESSONS_ROOT || process.env.NEXT_PUBLIC_LESSONS_ROOT || CommonEnvironmentHelper.LessonsRoot;
   }
 
@@ -59,7 +59,7 @@ export class CommonEnvironmentHelper {
 
     CommonEnvironmentHelper.ContentRoot = "https://democontent.churchapps.org";
     CommonEnvironmentHelper.B1Root = "https://{key}.demo.b1.church";
-    CommonEnvironmentHelper.ChumsRoot = "https://app.demo.chums.org";
+    CommonEnvironmentHelper.B1AdminRoot = "https://demo.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://demo.lessons.church";
   }
 
@@ -78,7 +78,7 @@ export class CommonEnvironmentHelper {
 
     CommonEnvironmentHelper.ContentRoot = "https://content.staging.churchapps.org";
     CommonEnvironmentHelper.B1Root = "https://{key}.staging.b1.church";
-    CommonEnvironmentHelper.ChumsRoot = "https://app.staging.chums.org";
+    CommonEnvironmentHelper.B1AdminRoot = "https://admin.staging.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://staging.lessons.church";
   }
 
@@ -96,7 +96,7 @@ export class CommonEnvironmentHelper {
 
     CommonEnvironmentHelper.ContentRoot = "https://content.churchapps.org";
     CommonEnvironmentHelper.B1Root = "https://{key}.b1.church";
-    CommonEnvironmentHelper.ChumsRoot = "https://app.chums.org";
+    CommonEnvironmentHelper.B1AdminRoot = "https://admin.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://lessons.church";
   }
 

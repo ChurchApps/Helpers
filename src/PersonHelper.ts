@@ -5,7 +5,7 @@ export class PersonHelper {
 
   public static getPhotoPath(churchId: string, person: any) {
     if (!person.photoUpdated) {
-      if (person.id?.startsWith("PER0000")) return "https://app.staging.chums.org/images/demo/avatars/" + person.id + ".svg";
+      if (person.id?.startsWith("PER0000")) return "https://app.staging.b1.church/images/demo/avatars/" + person.id + ".svg";
       else return "";
     }
     else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + person.photoUpdated.getTime().toString();
