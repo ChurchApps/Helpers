@@ -143,7 +143,7 @@ export class ArrayHelper {
     const propertyNames = propertyName.split(".");
     let result: any = item;
     propertyNames.forEach(name => {
-      result = result[name];
+      if (result != null) result = result[name];
     });
     return result;
   }

@@ -40,7 +40,9 @@ export class UserHelper {
   }
 
   static checkAccess({ api, contentType, action }: IApiPermission): boolean {
-    const permissions = ApiHelper.getConfig(api).permissions;
+    const config = ApiHelper.getConfig(api);
+    if (!config) return false;
+    const permissions = config.permissions;
 
     let result = false;
     if (permissions !== undefined) {
@@ -52,7 +54,8 @@ export class UserHelper {
   }
 
   static createAppUrl(appUrl: string, returnUrl: string) {
-    const jwt = ApiHelper.getConfig("MembershipApi").jwt;
+    const config = ApiHelper.getConfig("MembershipApi");
+    const jwt = config?.jwt || "";
 
     return `${appUrl}/login/?jwt=${jwt}&returnUrl=${returnUrl}`;
   }

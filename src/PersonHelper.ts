@@ -8,7 +8,7 @@ export class PersonHelper {
       if (person.id?.startsWith("PER0000")) return "https://app.staging.b1.church/images/demo/avatars/" + person.id + ".svg";
       else return "";
     }
-    else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + person.photoUpdated.getTime().toString();
+    else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + new Date(person.photoUpdated).getTime().toString();
   }
 
   static getPhotoUrl(person: PersonInterface) {

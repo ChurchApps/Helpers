@@ -55,6 +55,7 @@ class ApiHelperClass {
 
   async getAnonymous(path: string, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = { method: "GET" };
     return await this.fetchWithErrorHandling(config.url + path, requestOptions);
   }
@@ -93,7 +94,6 @@ class ApiHelperClass {
       const response = await fetch(config.url + path, requestOptions);
       if (!response.ok) await this.throwApiError(response);
     } catch (e) {
-      console.log(e);
       if (this.onError) this.onError(config.url + path, requestOptions, e);
       throw (e);
     }
@@ -101,6 +101,7 @@ class ApiHelperClass {
 
   async postAnonymous(path: string, data: any[] | {}, apiName: ApiListType) {
     const config = this.getConfig(apiName);
+    if (!config) throw new Error(`API configuration not found: ${apiName}`);
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -120,8 +121,6 @@ class ApiHelperClass {
         }
       }
     } catch (e) {
-      console.log("Error loading url: " + url);
-      console.log(e)
       throw (e);
     }
   }
@@ -135,7 +134,6 @@ class ApiHelperClass {
       const json = await response.json();
       msg = json.errors[0];
     } catch { }
-    console.log("RESPONSE", response)
     ErrorHelper.logError(response.status.toString(), response.url, msg);
     throw new Error(msg || "Error");
   }
@@ -157,13 +155,8 @@ const ensureSingleton = () => {
   // Use a more unique key to avoid conflicts
   const SINGLETON_KEY = '__CHURCHAPPS_API_HELPER_SINGLETON__';
   
-  // ALWAYS create a new instance and overwrite any existing one
-  // This ensures the latest module load wins
   if (!globalObj[SINGLETON_KEY]) {
     globalObj[SINGLETON_KEY] = new ApiHelperClass();
-    console.log('🔧 ApiHelper SINGLETON created (new instance)');
-  } else {
-    console.log('🔄 ApiHelper SINGLETON already exists - using existing (configs:', globalObj[SINGLETON_KEY].apiConfigs.length, ')');
   }
   
   return globalObj[SINGLETON_KEY];

@@ -80,6 +80,7 @@ export class DateHelper {
   }
 
   static formatHtml5Time(time: Date): string {
+    if (time === undefined || time === null) return "";
     let h = time.getHours();
     let m = time.getMinutes();
     let s = time.getSeconds();
