@@ -56,6 +56,8 @@ export interface PlanInterface {
   ministryId?: string;
   serviceDate?: Date;
   notes?: string;
+  contentType?: string;
+  contentId?: string;
 }
 export interface PositionInterface {
   id?: string;
