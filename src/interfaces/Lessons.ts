@@ -53,3 +53,9 @@ export interface VenueActionResponseInterface {
   venueName?: string;
   sections?: LessonSectionInterface[];
 }
+
+// Response from /venues/public/planItems/{id}
+export interface VenuePlanItemsResponseInterface {
+  venueName?: string;
+  items?: import("./Doing").PlanItemInterface[];
+}

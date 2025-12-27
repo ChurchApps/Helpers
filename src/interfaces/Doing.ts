@@ -93,3 +93,42 @@ export interface BlockoutDateInterface {
   startDate?: Date;
   endDate?: Date;
 }
+
+export interface ExternalVenueRefInterface {
+  externalProviderId: string;
+  programId: string;
+  studyId: string;
+  lessonId: string;
+  venueId: string;
+}
+
+export interface ContentFileInterface {
+  id?: string;
+  name?: string;
+  url?: string;
+  fileType?: string;  // "image", "video", "audio", "document"
+  seconds?: number;
+}
+
+export interface PlanItemContentInterface {
+  provider: string;           // "lessons", "songs", "media", "church"
+  embedUrl?: string;          // URL for iframe embed
+  html?: string;              // Raw HTML content
+  files?: ContentFileInterface[];
+  metadata?: Record<string, any>;  // Provider-specific data
+}
+
+export interface PlanItemInterface {
+  id?: string;
+  planId?: string;
+  parentId?: string;
+  sort?: number;
+  itemType?: string;  // "header", "song", "action", "addOn", "lessonSection", "item"
+  relatedId?: string;
+  label?: string;
+  description?: string;
+  seconds?: number;
+  link?: string;
+  children?: PlanItemInterface[];
+  content?: PlanItemContentInterface;  // Populated by PlanHelper
+}
