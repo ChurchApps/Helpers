@@ -1,6 +1,6 @@
 import { ApiHelper } from "../ApiHelper";
 import type { PlanInterface, PlanItemInterface, PlanItemContentInterface, ExternalVenueRefInterface } from "../interfaces";
-import type { VenuePlanItemsResponseInterface, VenueActionResponseInterface } from "../interfaces/Lessons";
+import type { VenuePlanItemsResponseInterface, VenueActionResponseInterface, LessonTreeInterface, LessonActionTreeInterface } from "../interfaces/Lessons";
 import type { ContentProviderInterface } from "./ContentProvider";
 
 export class LessonsContentProvider implements ContentProviderInterface {
@@ -69,21 +69,9 @@ export class LessonsContentProvider implements ContentProviderInterface {
     return result;
   }
 
-  // Fetch venue plan items (for preview mode)
-  async fetchVenuePlanItems(plan: PlanInterface): Promise<VenuePlanItemsResponseInterface> {
-    if (!this.hasAssociatedLesson(plan)) return { items: [] };
-    const externalRef = this.getExternalRef(plan);
-    if (externalRef) return await ApiHelper.getAnonymous(`/externalProviders/${externalRef.externalProviderId}/venue/${externalRef.venueId}/planItems`, "LessonsApi");
-    return await ApiHelper.getAnonymous(`/venues/public/planItems/${plan.contentId}`, "LessonsApi");
-  }
-
-  // Fetch venue actions (for expanding sections)
-  async fetchVenueActions(plan: PlanInterface): Promise<VenueActionResponseInterface> {
-    if (!this.hasAssociatedLesson(plan)) return { sections: [] };
-    const externalRef = this.getExternalRef(plan);
-    if (externalRef) return await ApiHelper.getAnonymous(`/externalProviders/${externalRef.externalProviderId}/venue/${externalRef.venueId}/actions`, "LessonsApi");
-    return await ApiHelper.getAnonymous(`/venues/public/actions/${plan.contentId}`, "LessonsApi");
-  }
+  // ============================================
+  // Plan/Lesson Association Methods
+  // ============================================
 
   hasAssociatedLesson(plan: PlanInterface): boolean {
     return (plan?.contentType === "venue" || plan?.contentType === "externalVenue") && !!plan?.contentId;
@@ -108,5 +96,184 @@ export class LessonsContentProvider implements ContentProviderInterface {
       return this.getExternalRef(plan)?.venueId || null;
     }
     return plan.contentId || null;
+  }
+
+  // ============================================
+  // API Fetch Methods
+  // ============================================
+
+  /**
+   * Fetch venue plan items - the basic hierarchical structure
+   * Returns: headers with children (sections), but sections don't have their actions
+   * Use this for preview mode display
+   */
+  async fetchVenuePlanItems(plan: PlanInterface): Promise<VenuePlanItemsResponseInterface> {
+    if (!this.hasAssociatedLesson(plan)) return { items: [] };
+    const externalRef = this.getExternalRef(plan);
+    if (externalRef) {
+      return await ApiHelper.getAnonymous(
+        `/externalProviders/${externalRef.externalProviderId}/venue/${externalRef.venueId}/planItems`,
+        "LessonsApi"
+      );
+    }
+    return await ApiHelper.getAnonymous(`/venues/public/planItems/${plan.contentId}`, "LessonsApi");
+  }
+
+  /**
+   * Fetch venue actions - sections with their full action lists
+   * Use this for action selection dialogs and full expansion
+   */
+  async fetchVenueActions(plan: PlanInterface): Promise<VenueActionResponseInterface> {
+    if (!this.hasAssociatedLesson(plan)) return { sections: [] };
+    const externalRef = this.getExternalRef(plan);
+    if (externalRef) {
+      return await ApiHelper.getAnonymous(
+        `/externalProviders/${externalRef.externalProviderId}/venue/${externalRef.venueId}/actions`,
+        "LessonsApi"
+      );
+    }
+    return await ApiHelper.getAnonymous(`/venues/public/actions/${plan.contentId}`, "LessonsApi");
+  }
+
+  /**
+   * Fetch the full lesson tree for browsing (programs -> studies -> lessons -> venues)
+   */
+  async fetchLessonTree(): Promise<LessonTreeInterface> {
+    return await ApiHelper.getAnonymous("/lessons/public/tree", "LessonsApi");
+  }
+
+  /**
+   * Fetch the action tree for action selection (includes actions in each venue section)
+   */
+  async fetchActionTree(): Promise<LessonActionTreeInterface> {
+    return await ApiHelper.getAnonymous("/lessons/public/actionTree", "LessonsApi");
+  }
+
+  // ============================================
+  // Display List Methods (for preview/display without full actions)
+  // ============================================
+
+  /**
+   * Get the display list - hierarchical items suitable for preview
+   * Structure: headers -> sections (no actions expanded)
+   * This is the lightweight version for showing what a lesson contains
+   */
+  async getDisplayList(plan: PlanInterface): Promise<PlanItemInterface[]> {
+    const response = await this.fetchVenuePlanItems(plan);
+    return response?.items || [];
+  }
+
+  /**
+   * Get display list with sections only (strip actions from children)
+   * Use this when importing a lesson as editable plan items
+   */
+  async getSectionsOnlyList(plan: PlanInterface): Promise<PlanItemInterface[]> {
+    const response = await this.fetchVenuePlanItems(plan);
+    if (!response?.items) return [];
+
+    return response.items.map(item => ({
+      ...item,
+      children: item.children?.map(section => ({
+        ...section,
+        children: undefined // Remove actions from sections
+      }))
+    }));
+  }
+
+  // ============================================
+  // Expanded List Methods (with full actions)
+  // ============================================
+
+  /**
+   * Get the fully expanded list - items with all actions populated in sections
+   * Merges fetchVenuePlanItems with fetchVenueActions to get complete data
+   */
+  async getExpandedList(plan: PlanInterface): Promise<PlanItemInterface[]> {
+    const [planItemsResponse, actionsResponse] = await Promise.all([
+      this.fetchVenuePlanItems(plan),
+      this.fetchVenueActions(plan)
+    ]);
+
+    if (!planItemsResponse?.items) return [];
+
+    // Create a map of section ID -> actions
+    const sectionActionsMap = new Map<string, PlanItemInterface[]>();
+    if (actionsResponse?.sections) {
+      for (const section of actionsResponse.sections) {
+        if (section.id && section.actions) {
+          sectionActionsMap.set(section.id, section.actions.map(action => ({
+            itemType: "action",
+            relatedId: action.id,
+            label: action.name,
+            description: action.actionType,
+            seconds: action.seconds
+          })));
+        }
+      }
+    }
+
+    // Recursively expand sections with their actions
+    const expandItem = (item: PlanItemInterface): PlanItemInterface => {
+      if (!item.children) return item;
+
+      return {
+        ...item,
+        children: item.children.map(child => {
+          // If this is a section (has relatedId), try to get its actions
+          if (child.relatedId && sectionActionsMap.has(child.relatedId)) {
+            return {
+              ...child,
+              children: sectionActionsMap.get(child.relatedId)
+            };
+          }
+          // Otherwise recursively process
+          return expandItem(child);
+        })
+      };
+    };
+
+    return planItemsResponse.items.map(expandItem);
+  }
+
+  // ============================================
+  // Embed URL Helpers
+  // ============================================
+
+  /**
+   * Get embed URL for an action
+   */
+  getActionEmbedUrl(actionId: string, externalProviderId?: string): string {
+    if (externalProviderId) {
+      return `${this.lessonsUrl}/embed/external/${externalProviderId}/action/${actionId}`;
+    }
+    return `${this.lessonsUrl}/embed/action/${actionId}`;
+  }
+
+  /**
+   * Get embed URL for an add-on
+   */
+  getAddOnEmbedUrl(addOnId: string, externalProviderId?: string): string {
+    if (externalProviderId) {
+      return `${this.lessonsUrl}/embed/external/${externalProviderId}/addon/${addOnId}`;
+    }
+    return `${this.lessonsUrl}/embed/addon/${addOnId}`;
+  }
+
+  /**
+   * Get embed URL for a section
+   */
+  getSectionEmbedUrl(sectionId: string, externalProviderId?: string): string {
+    if (externalProviderId) {
+      return `${this.lessonsUrl}/embed/external/${externalProviderId}/section/${sectionId}`;
+    }
+    return `${this.lessonsUrl}/embed/section/${sectionId}`;
+  }
+
+  /**
+   * Get the external provider ID from a plan (if external)
+   */
+  getExternalProviderId(plan: PlanInterface): string | null {
+    const externalRef = this.getExternalRef(plan);
+    return externalRef?.externalProviderId || null;
   }
 }
