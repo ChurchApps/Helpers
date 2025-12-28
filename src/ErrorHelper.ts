@@ -1,5 +1,5 @@
-import { ErrorLogInterface, ErrorAppDataInterface } from "./interfaces/Error";
-import { ApiHelper } from "./ApiHelper";
+import { ErrorLogInterface, ErrorAppDataInterface } from "./interfaces/Error.js";
+import { ApiHelper } from "./ApiHelper.js";
 
 
 export class ErrorHelper {

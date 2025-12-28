@@ -1,5 +1,5 @@
-import { PersonInterface, ContactInfoInterface } from "./interfaces";
-import { CommonEnvironmentHelper } from "./CommonEnvironmentHelper";
+import { PersonInterface, ContactInfoInterface } from "./interfaces/index.js";
+import { CommonEnvironmentHelper } from "./CommonEnvironmentHelper.js";
 
 export class PersonHelper {
 

@@ -1,5 +1,5 @@
-import { LoginUserChurchInterface, UserInterface } from "./Access";
-import { PersonInterface } from "./Membership";
+import { LoginUserChurchInterface, UserInterface } from "./Access.js";
+import { PersonInterface } from "./Membership.js";
 
 export interface UserContextInterface {
   user: UserInterface;

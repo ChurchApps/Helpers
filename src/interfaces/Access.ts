@@ -1,4 +1,4 @@
-import { PersonInterface } from "./Membership";
+import { PersonInterface } from "./Membership.js";
 
 export interface ApiInterface {
   name: string;
