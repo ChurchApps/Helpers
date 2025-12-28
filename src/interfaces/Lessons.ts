@@ -57,5 +57,5 @@ export interface VenueActionResponseInterface {
 // Response from /venues/public/planItems/{id}
 export interface VenuePlanItemsResponseInterface {
   venueName?: string;
-  items?: import("./Doing").PlanItemInterface[];
+  items?: import("./Doing.js").PlanItemInterface[];
 }

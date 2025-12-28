@@ -1,6 +1,8 @@
-import { EventInterface } from "./interfaces";
-import { RRule, datetime } from "rrule";
-import { ParsedOptions } from "rrule/dist/esm/types";
+import { EventInterface } from "./interfaces/index.js";
+import { RRule } from "rrule";
+
+// Define ParsedOptions based on RRule's options
+type ParsedOptions = Partial<InstanceType<typeof RRule>["options"]>;
 
 export class EventHelper {
 

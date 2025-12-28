@@ -1,6 +1,6 @@
-import type { PlanInterface, PlanItemInterface, PlanItemContentInterface } from "./interfaces";
-import type { ContentProviderInterface } from "./contentProviders/ContentProvider";
-import { LessonsContentProvider } from "./contentProviders/LessonsContentProvider";
+import type { PlanInterface, PlanItemInterface, PlanItemContentInterface } from "./interfaces/index.js";
+import type { ContentProviderInterface } from "./contentProviders/ContentProvider.js";
+import { LessonsContentProvider } from "./contentProviders/LessonsContentProvider.js";
 
 export class PlanHelper {
   private static providers: ContentProviderInterface[] = [

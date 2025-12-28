@@ -1,17 +1,10 @@
 import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc.js";
+import customParseFormat from "dayjs/plugin/customParseFormat.js";
 
-// Use dynamic import for ES module compatibility with dayjs plugins
-const loadPlugins = async () => {
-  const utc = await import("dayjs/plugin/utc");
-  const customParseFormat = await import("dayjs/plugin/customParseFormat");
-  dayjs.extend((utc as any).default || utc);
-  dayjs.extend((customParseFormat as any).default || customParseFormat);
-};
-
-// Initialize the plugins
-loadPlugins().catch(() => {
-  console.warn("Could not load dayjs plugins");
-});
+// Extend dayjs with plugins
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
 
 export class DateHelper {
 

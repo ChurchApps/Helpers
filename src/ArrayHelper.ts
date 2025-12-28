@@ -1,4 +1,4 @@
-import { UniqueIdHelper } from "./UniqueIdHelper";
+import { UniqueIdHelper } from "./UniqueIdHelper.js";
 
 export class ArrayHelper {
   static getIds(array: any[], propertyName: string) {

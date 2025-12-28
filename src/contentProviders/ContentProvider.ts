@@ -1,4 +1,4 @@
-import type { PlanInterface, PlanItemInterface, PlanItemContentInterface } from "../interfaces";
+import type { PlanInterface, PlanItemInterface, PlanItemContentInterface } from "../interfaces/index.js";
 
 export interface ContentProviderInterface {
   // Unique identifier for this provider

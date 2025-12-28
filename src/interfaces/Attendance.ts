@@ -1,4 +1,4 @@
-import { CampusInterface, ServiceInterface, ServiceTimeInterface, PersonInterface } from ".";
+import { CampusInterface, ServiceInterface, ServiceTimeInterface, PersonInterface } from "./index.js";
 
 export interface AttendanceInterface {
   campus: CampusInterface;

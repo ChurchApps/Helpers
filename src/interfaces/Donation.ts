@@ -1,4 +1,4 @@
-import { PersonInterface } from ".";
+import { PersonInterface } from "./index.js";
 
 export interface DonationBatchInterface {
   id?: string;

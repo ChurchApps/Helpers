@@ -1,2 +1,2 @@
-export type { ContentProviderInterface } from "./ContentProvider";
-export { LessonsContentProvider } from "./LessonsContentProvider";
+export type { ContentProviderInterface } from "./ContentProvider.js";
+export { LessonsContentProvider } from "./LessonsContentProvider.js";

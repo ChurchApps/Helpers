@@ -1,7 +1,7 @@
-import { ApiHelper } from "../ApiHelper";
-import type { PlanInterface, PlanItemInterface, PlanItemContentInterface, ExternalVenueRefInterface } from "../interfaces";
-import type { VenuePlanItemsResponseInterface, VenueActionResponseInterface, LessonTreeInterface, LessonActionTreeInterface } from "../interfaces/Lessons";
-import type { ContentProviderInterface } from "./ContentProvider";
+import { ApiHelper } from "../ApiHelper.js";
+import type { PlanInterface, PlanItemInterface, PlanItemContentInterface, ExternalVenueRefInterface } from "../interfaces/index.js";
+import type { VenuePlanItemsResponseInterface, VenueActionResponseInterface, LessonTreeInterface, LessonActionTreeInterface } from "../interfaces/Lessons.js";
+import type { ContentProviderInterface } from "./ContentProvider.js";
 
 export class LessonsContentProvider implements ContentProviderInterface {
   readonly providerId = "lessons";

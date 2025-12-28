@@ -1,5 +1,5 @@
-import { ApiHelper } from "./ApiHelper"
-import { UserInterface, UserContextInterface, IApiPermission, PersonInterface, LoginUserChurchInterface } from "./interfaces";
+import { ApiHelper } from "./ApiHelper.js"
+import { UserInterface, UserContextInterface, IApiPermission, PersonInterface, LoginUserChurchInterface } from "./interfaces/index.js";
 
 export class UserHelper {
   static currentUserChurch: LoginUserChurchInterface;

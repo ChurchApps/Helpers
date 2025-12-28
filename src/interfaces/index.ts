@@ -1,14 +1,14 @@
-export * from "./Error";
-export * from "./UserContextInterface";
-export * from "./Permissions";
+export * from "./Error.js";
+export * from "./UserContextInterface.js";
+export * from "./Permissions.js";
 
 // API interfaces
-export * from "./Access";
-export * from "./Attendance";
-export * from "./Content";
-export * from "./Doing";
-export * from "./Donation";
-export * from "./Lessons";
-export * from "./Membership";
-export * from "./Messaging";
-export * from "./Reporting";
+export * from "./Access.js";
+export * from "./Attendance.js";
+export * from "./Content.js";
+export * from "./Doing.js";
+export * from "./Donation.js";
+export * from "./Lessons.js";
+export * from "./Membership.js";
+export * from "./Messaging.js";
+export * from "./Reporting.js";

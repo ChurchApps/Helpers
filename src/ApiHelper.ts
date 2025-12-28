@@ -1,5 +1,5 @@
-import { ApiConfig, RolePermissionInterface, ApiListType } from "./interfaces";
-import { ErrorHelper } from "./ErrorHelper";
+import { ApiConfig, RolePermissionInterface, ApiListType } from "./interfaces/index.js";
+import { ErrorHelper } from "./ErrorHelper.js";
 
 // Global singleton pattern to ensure single instance across all packages
 declare global {

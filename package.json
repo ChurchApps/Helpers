@@ -1,21 +1,22 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.2.9",
+  "version": "1.2.14",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
-  "type": "module",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/cjs/index.js"
     }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rimraf dist",
-    "build": "yarn clean && tsc",
+    "build": "yarn clean && tsc && tsc -p tsconfig.cjs.json && echo {\"type\":\"module\"} > dist/esm/package.json && echo {\"type\":\"commonjs\"} > dist/cjs/package.json",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write src/**/*.ts",
