@@ -13,8 +13,8 @@ export class LessonsContentProvider implements ContentProviderInterface {
   }
 
   canHandle(plan: PlanInterface, planItem: PlanItemInterface): boolean {
-    // Handles: action, addOn, lessonSection, and items with relatedId when plan has lesson
-    const lessonTypes = ["action", "addOn", "lessonSection"];
+    // Handles: lessonAction, lessonAddOn, lessonSection, and items with relatedId when plan has lesson
+    const lessonTypes = ["lessonAction", "lessonAddOn", "lessonSection"];
     const hasLessonPlan = plan?.contentType === "venue" || plan?.contentType === "externalVenue";
 
     if (lessonTypes.includes(planItem.itemType) && planItem.relatedId) return true;
@@ -30,8 +30,8 @@ export class LessonsContentProvider implements ContentProviderInterface {
     const result = new Map<string, PlanItemContentInterface>();
 
     // Group by type for efficient batching
-    const actions = planItems.filter(p => p.itemType === "action" && p.relatedId);
-    const addOns = planItems.filter(p => p.itemType === "addOn" && p.relatedId);
+    const actions = planItems.filter(p => p.itemType === "lessonAction" && p.relatedId);
+    const addOns = planItems.filter(p => p.itemType === "lessonAddOn" && p.relatedId);
     const sections = planItems.filter(p =>
       (p.itemType === "lessonSection" || p.itemType === "item") && p.relatedId
     );
@@ -202,7 +202,7 @@ export class LessonsContentProvider implements ContentProviderInterface {
       for (const section of actionsResponse.sections) {
         if (section.id && section.actions) {
           sectionActionsMap.set(section.id, section.actions.map(action => ({
-            itemType: "action",
+            itemType: "lessonAction",
             relatedId: action.id,
             label: action.name,
             description: action.actionType,

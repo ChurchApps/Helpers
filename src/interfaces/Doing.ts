@@ -123,7 +123,7 @@ export interface PlanItemInterface {
   planId?: string;
   parentId?: string;
   sort?: number;
-  itemType?: string;  // "header", "song", "action", "addOn", "lessonSection", "item"
+  itemType?: string;  // "header", "song", "lessonAction", "lessonAddOn", "lessonSection", "item"
   relatedId?: string;
   label?: string;
   description?: string;
