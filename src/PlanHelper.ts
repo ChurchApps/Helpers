@@ -106,4 +106,32 @@ export class PlanHelper {
   static getLessonsProvider(): LessonsContentProvider {
     return this.providers.find(p => p.providerId === "lessons") as LessonsContentProvider;
   }
+
+  // ============================================
+  // Time Formatting Utilities
+  // ============================================
+
+  /**
+   * Format seconds as MM:SS string
+   * @param seconds - Number of seconds to format
+   * @returns Formatted time string (e.g., "3:45")
+   */
+  static formatTime(seconds: number): string {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return mins + ":" + (secs < 10 ? "0" : "") + secs;
+  }
+
+  /**
+   * Calculate total duration of a section's children
+   * @param section - PlanItem with children
+   * @returns Total seconds from all children
+   */
+  static getSectionDuration(section: PlanItemInterface): number {
+    let totalSeconds = 0;
+    section.children?.forEach((child) => {
+      totalSeconds += child.seconds || 0;
+    });
+    return totalSeconds;
+  }
 }
