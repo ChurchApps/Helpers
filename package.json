@@ -1,6 +1,6 @@
 {
   "name": "@churchapps/helpers",
-  "version": "1.2.14",
+  "version": "1.2.15",
   "description": "Library of helper functions not specific to any one ChurchApps project or framework.",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
