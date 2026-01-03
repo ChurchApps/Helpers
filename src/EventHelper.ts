@@ -1,6 +1,6 @@
 import { EventInterface } from "./interfaces/index.js";
-import rrulePkg from "rrule";
-const { RRule } = rrulePkg;
+import * as rrule from "rrule";
+const RRule = rrule.RRule || (rrule as any).default?.RRule || rrule;
 
 // Define ParsedOptions based on RRule's options
 type ParsedOptions = Partial<InstanceType<typeof RRule>["options"]>;
