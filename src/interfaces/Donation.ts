@@ -1,5 +1,7 @@
 import { PersonInterface } from "./index.js";
 
+export type DonationStatus = "pending" | "complete" | "failed";
+
 export interface DonationBatchInterface {
   id?: string;
   name?: string;
@@ -16,6 +18,7 @@ export interface DonationInterface {
   method?: string;
   methodDetails?: string;
   notes?: string;
+  status?: DonationStatus;
   person?: PersonInterface;
   fund?: FundInterface;
 }
