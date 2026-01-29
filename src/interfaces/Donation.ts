@@ -5,7 +5,7 @@ export type DonationStatus = "pending" | "complete" | "failed";
 export interface DonationBatchInterface {
   id?: string;
   name?: string;
-  batchDate?: Date;
+  batchDate?: string;  // YYYY-MM-DD format - date-only field
   donationCount?: number;
   totalAmount?: number;
 }
@@ -13,7 +13,7 @@ export interface DonationInterface {
   id?: string;
   batchId?: string;
   personId?: string;
-  donationDate?: Date;
+  donationDate?: string;  // YYYY-MM-DD format - date-only field
   amount?: number;
   method?: string;
   methodDetails?: string;
