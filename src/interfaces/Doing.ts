@@ -58,6 +58,10 @@ export interface PlanInterface {
   notes?: string;
   contentType?: string;
   contentId?: string;
+  // Content provider fields
+  providerId?: string;
+  providerPlanId?: string;  // Path to the content in the provider
+  providerPlanName?: string;
 }
 export interface PositionInterface {
   id?: string;
@@ -131,4 +135,5 @@ export interface PlanItemInterface {
   link?: string;
   children?: PlanItemInterface[];
   content?: PlanItemContentInterface;  // Populated by PlanHelper
+  providerId?: string;  // Provider that owns this item's content
 }

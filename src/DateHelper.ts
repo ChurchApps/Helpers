@@ -10,7 +10,16 @@ export class DateHelper {
 
   //Fixes timezone issues when you just need the date.
   static toDate(input: any) {
-    return new Date(Date.parse(input.toString().replace("Z", "")));
+    const str = input.toString();
+    // Check if it's a YYYY-MM-DD format (HTML5 date input)
+    const dateOnlyMatch = str.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (dateOnlyMatch) {
+      // Parse as local date at noon to avoid timezone issues
+      const [, year, month, day] = dateOnlyMatch;
+      return new Date(parseInt(year), parseInt(month) - 1, parseInt(day), 12, 0, 0);
+    }
+    // For other formats, use existing behavior
+    return new Date(Date.parse(str.replace("Z", "")));
   }
 
   static toDateTime(input: any) {
