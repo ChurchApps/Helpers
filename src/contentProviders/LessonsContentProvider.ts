@@ -33,8 +33,7 @@ export class LessonsContentProvider implements ContentProviderInterface {
     const actions = planItems.filter(p => p.itemType === "lessonAction" && p.relatedId);
     const addOns = planItems.filter(p => p.itemType === "lessonAddOn" && p.relatedId);
     const sections = planItems.filter(p =>
-      (p.itemType === "lessonSection" || p.itemType === "item") && p.relatedId
-    );
+      (p.itemType === "lessonSection" || p.itemType === "item") && p.relatedId);
 
     const externalRef = this.getExternalRef(plan);
 

@@ -23,7 +23,7 @@ export class CommonEnvironmentHelper {
       case "prod": CommonEnvironmentHelper.initProd(); break;
       default: CommonEnvironmentHelper.initDev(); break;
     }
-  }
+  };
 
   static initDev = () => {
     this.initStaging(); //Use staging values for anything not provided
@@ -42,7 +42,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.B1Root = process.env.REACT_APP_B1_ROOT || process.env.NEXT_PUBLIC_B1_ROOT || CommonEnvironmentHelper.B1Root;
     CommonEnvironmentHelper.B1AdminRoot = process.env.REACT_APP_B1ADMIN_ROOT || process.env.NEXT_PUBLIC_B1ADMIN_ROOT || CommonEnvironmentHelper.B1AdminRoot;
     CommonEnvironmentHelper.LessonsRoot = process.env.REACT_APP_LESSONS_ROOT || process.env.NEXT_PUBLIC_LESSONS_ROOT || CommonEnvironmentHelper.LessonsRoot;
-  }
+  };
 
   //NOTE: None of these values are secret.
   static initDemo = () => {
@@ -61,7 +61,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.B1Root = "https://{key}.demo.b1.church";
     CommonEnvironmentHelper.B1AdminRoot = "https://demo.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://demo.lessons.church";
-  }
+  };
 
   //NOTE: None of these values are secret.
   static initStaging = () => {
@@ -80,7 +80,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.B1Root = "https://{key}.staging.b1.church";
     CommonEnvironmentHelper.B1AdminRoot = "https://admin.staging.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://staging.lessons.church";
-  }
+  };
 
   //NOTE: None of these values are secret.
   static initProd = () => {
@@ -98,7 +98,7 @@ export class CommonEnvironmentHelper {
     CommonEnvironmentHelper.B1Root = "https://{key}.b1.church";
     CommonEnvironmentHelper.B1AdminRoot = "https://admin.b1.church";
     CommonEnvironmentHelper.LessonsRoot = "https://lessons.church";
-  }
+  };
 
 }
 

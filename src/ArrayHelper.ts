@@ -29,11 +29,11 @@ export class ArrayHelper {
 
   static getOne(array: any[], propertyName: string, value: any) {
     for (const item of array || []) if (ArrayHelper.compare(item, propertyName, value)) return item;
-    return null
+    return null;
   }
 
   static getAll(array: any[], propertyName: string, value: any) {
-    const result: any[] = []
+    const result: any[] = [];
     for (const item of array || []) {
       if (ArrayHelper.compare(item, propertyName, value)) result.push(item);
     }
@@ -41,7 +41,7 @@ export class ArrayHelper {
   }
 
   static getAllArray(array: any[], propertyName: string, values: any[]) {
-    const result: any[] = []
+    const result: any[] = [];
     for (const item of array || []) if (values.indexOf(item[propertyName]) > -1) result.push(item);
     return result;
   }
@@ -63,14 +63,14 @@ export class ArrayHelper {
     const result: any[] = [];
 
     for (const item of array) {
-      const val = (propertyName.indexOf(".") === -1) ? item[propertyName] : this.getDeepValue(item, propertyName)
+      const val = (propertyName.indexOf(".") === -1) ? item[propertyName] : this.getDeepValue(item, propertyName);
       if (result.indexOf(val) === -1) result.push(val);
     }
     return result;
   }
 
   static getUnique(array: any[]) {
-    const result: any[] = []
+    const result: any[] = [];
     const jsonList: string[] = [];
     for (const item of array) {
       const json = JSON.stringify(item);
@@ -87,12 +87,12 @@ export class ArrayHelper {
     values.forEach(v => {
       const filtered = this.getAllOperator(array, propertyName, v, operator.replace("notIn", "notEqual").replace("in", "equals").replace("donatedToAny", "equals").replace("donatedTo", "equals").replace("attendedCampus", "equals").replace("attendedAny", "equals").replace("attendedServiceTime", "equals").replace("attendedService", "equals").replace("attendedGroup", "equals"), dataType);
       filtered.forEach(f => result.push(f));
-    })
+    });
     return result;
   }
 
   static getAllOperator(array: any[], propertyName: string, value: any, operator: string, dataType = "string") {
-    const result: any[] = []
+    const result: any[] = [];
     for (const item of array) {
 
 
@@ -107,33 +107,15 @@ export class ArrayHelper {
       }
 
       switch (operator) {
-        case "equals":
-          if (propVal === compVal) result.push(item);
-          break;
-        case "startsWith":
-          if (propVal.indexOf(compVal) === 0) result.push(item);
-          break;
-        case "endsWith":
-          if (propVal.indexOf(compVal) === propVal.length - compVal.length) result.push(item);
-          break;
-        case "contains":
-          if (propVal.indexOf(compVal) > -1) result.push(item);
-          break;
-        case "greaterThan":
-          if (propVal > compVal) result.push(item);
-          break;
-        case "greaterThanEqual":
-          if (propVal >= compVal) result.push(item);
-          break;
-        case "lessThan":
-          if (propVal < compVal) result.push(item);
-          break;
-        case "lessThanEqual":
-          if (propVal <= compVal) result.push(item);
-          break;
-        case "notEqual":
-          if (propVal !== compVal) result.push(item);
-          break;
+        case "equals": if (propVal === compVal) result.push(item); break;
+        case "startsWith": if (propVal.indexOf(compVal) === 0) result.push(item); break;
+        case "endsWith": if (propVal.indexOf(compVal) === propVal.length - compVal.length) result.push(item); break;
+        case "contains": if (propVal.indexOf(compVal) > -1) result.push(item); break;
+        case "greaterThan": if (propVal > compVal) result.push(item); break;
+        case "greaterThanEqual": if (propVal >= compVal) result.push(item); break;
+        case "lessThan": if (propVal < compVal) result.push(item); break;
+        case "lessThanEqual": if (propVal <= compVal) result.push(item); break;
+        case "notEqual": if (propVal !== compVal) result.push(item); break;
       }
     }
     return result;

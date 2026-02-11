@@ -9,9 +9,7 @@ export class Permissions {
       },
       edit: { api: "AttendanceApi", contentType: "Attendance", action: "Edit" }
     },
-    services: {
-      edit: { api: "AttendanceApi", contentType: "Services", action: "Edit" }
-    }
+    services: { edit: { api: "AttendanceApi", contentType: "Services", action: "Edit" } }
   };
 
   static membershipApi = {
@@ -19,19 +17,13 @@ export class Permissions {
       view: { api: "MembershipApi", contentType: "Roles", action: "View" },
       edit: { api: "MembershipApi", contentType: "Roles", action: "Edit" }
     },
-    settings: {
-      edit: { api: "MembershipApi", contentType: "Settings", action: "Edit" }
-    },
-    server: {
-      admin: { api: "MembershipApi", contentType: "Server", action: "Admin" }
-    },
+    settings: { edit: { api: "MembershipApi", contentType: "Settings", action: "Edit" } },
+    server: { admin: { api: "MembershipApi", contentType: "Server", action: "Admin" } },
     forms: {
       admin: { api: "MembershipApi", contentType: "Forms", action: "Admin" },
       edit: { api: "MembershipApi", contentType: "Forms", action: "Edit" }
     },
-    groups: {
-      edit: { api: "MembershipApi", contentType: "Groups", action: "Edit" }
-    },
+    groups: { edit: { api: "MembershipApi", contentType: "Groups", action: "Edit" } },
     people: {
       view: { api: "MembershipApi", contentType: "People", action: "View" },
       viewMembers: {
@@ -41,9 +33,7 @@ export class Permissions {
       },
       edit: { api: "MembershipApi", contentType: "People", action: "Edit" }
     },
-    plans: {
-      edit: { api: "MembershipApi", contentType: "Plans", action: "Edit" }
-    },
+    plans: { edit: { api: "MembershipApi", contentType: "Plans", action: "Edit" } },
     groupMembers: {
       edit: {
         api: "MembershipApi",
@@ -75,12 +65,8 @@ export class Permissions {
   };
 
   static contentApi = {
-    chat: {
-      host: { api: "ContentApi", contentType: "Chat", action: "Host" }
-    },
-    content: {
-      edit: { api: "ContentApi", contentType: "Content", action: "Edit" }
-    },
+    chat: { host: { api: "ContentApi", contentType: "Chat", action: "Host" } },
+    content: { edit: { api: "ContentApi", contentType: "Content", action: "Edit" } },
     streamingServices: {
       edit: {
         api: "ContentApi",

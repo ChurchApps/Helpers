@@ -1,4 +1,4 @@
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
 import customParseFormat from "dayjs/plugin/customParseFormat.js";
 
@@ -53,19 +53,19 @@ export class DateHelper {
   }
 
   static getLastSunday() {
-    let result = new Date();
+    const result = new Date();
     while (result.getDay() !== 0) result.setDate(result.getDate() - 1);
     return result;
   }
 
   static getNextSunday() {
-    let result = this.getLastSunday();
+    const result = this.getLastSunday();
     result.setDate(result.getDate() + 7);
     return result;
   }
 
   static getWeekSunday(year: number, week: number) {
-    let result = new Date(year, 0, 1);
+    const result = new Date(year, 0, 1);
     while (result.getDay() !== 0) result.setDate(result.getDate() + 1);
     result.setDate(result.getDate() + ((week - 1) * 7));
     return result;
@@ -75,10 +75,10 @@ export class DateHelper {
     if (!date) return "";
 
     // If already a YYYY-MM-DD string, return as-is
-    if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
+    if (typeof date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(date)) return date;
 
     // If ISO string, extract date portion (ignore timezone)
-    if (typeof date === 'string') {
+    if (typeof date === "string") {
       const match = date.match(/^(\d{4}-\d{2}-\d{2})/);
       if (match) return match[1];
     }
@@ -88,8 +88,8 @@ export class DateHelper {
     if (isNaN(d.getTime())) return "";
 
     const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, '0');
-    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
 
@@ -97,22 +97,22 @@ export class DateHelper {
   static toMysqlDateOnly(date: Date | string | null | undefined): string | null {
     if (date === null || date === undefined) return null;
 
-    if (typeof date === 'string') {
+    if (typeof date === "string") {
       const match = date.match(/^(\d{4}-\d{2}-\d{2})/);
       return match ? match[1] : null;
     }
 
     const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
     return `${year}-${month}-${day}`;
   }
 
   static formatHtml5Time(time: Date): string {
     if (time === undefined || time === null) return "";
-    let h = time.getHours();
-    let m = time.getMinutes();
-    let s = time.getSeconds();
+    const h = time.getHours();
+    const m = time.getMinutes();
+    const s = time.getSeconds();
     return `${h < 10 ? ("0" + h) : h}:${m < 10 ? ("0" + m) : m}:${s < 10 ? ("0" + s) : s}`;
   }
 
@@ -124,20 +124,17 @@ export class DateHelper {
   }
 
   static getDisplayDuration(d: Date): string {
-    let seconds = Math.round((new Date().getTime() - d.getTime()) / 1000);
+    const seconds = Math.round((new Date().getTime() - d.getTime()) / 1000);
     if (seconds > 86400) {
-      let days = Math.floor(seconds / 86400);
+      const days = Math.floor(seconds / 86400);
       return (days === 1) ? "1d" : days.toString() + "d";
-    }
-    else if (seconds > 3600) {
-      let hours = Math.floor(seconds / 3600);
+    } else if (seconds > 3600) {
+      const hours = Math.floor(seconds / 3600);
       return (hours === 1) ? "1h" : hours.toString() + "h";
-    }
-    else if (seconds > 60) {
-      let minutes = Math.floor(seconds / 60);
+    } else if (seconds > 60) {
+      const minutes = Math.floor(seconds / 60);
       return (minutes === 1) ? "1m" : minutes.toString() + "m";
-    }
-    else return (seconds === 1) ? "1s" : Math.floor(seconds).toString() + "s";
+    } else return (seconds === 1) ? "1s" : Math.floor(seconds).toString() + "s";
   }
 
   static getShortDate(d: Date): string {
@@ -154,26 +151,26 @@ export class DateHelper {
     try {
       // Convert date-fns format to dayjs format
       const dayjsFormat = format
-        .replace(/yyyy/g, 'YYYY')
-        .replace(/yy/g, 'YY')
-        .replace(/d/g, 'D')
-        .replace(/DD/g, 'DD')
-        .replace(/a/g, 'A');
-      
+        .replace(/yyyy/g, "YYYY")
+        .replace(/yy/g, "YY")
+        .replace(/d/g, "D")
+        .replace(/DD/g, "DD")
+        .replace(/a/g, "A");
+
       return dayjs(date).format(dayjsFormat);
     } catch { return ""; }
   }
 
   public static toMysqlDate(d: Date) {
     if (d === null || d === undefined) {
-        return undefined;
+      return undefined;
     }
-    return dayjs(d).format("YYYY-MM-DD HH:mm:ss")
+    return dayjs(d).format("YYYY-MM-DD HH:mm:ss");
   }
 
   public static subtractHoursFromNow(hour: number) {
-      const now = new Date();
-      return new Date(now.setHours(now.getHours() - hour));
+    const now = new Date();
+    return new Date(now.setHours(now.getHours() - hour));
   }
 
   public static toUTCDate(d: Date) {

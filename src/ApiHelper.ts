@@ -18,7 +18,7 @@ class ApiHelperClass {
 
   getConfig(keyName: string) {
     let result: ApiConfig = null;
-    this.apiConfigs.forEach(config => { if (config.keyName === keyName) result = config });
+    this.apiConfigs.forEach(config => { if (config.keyName === keyName) result = config; });
     //if (result === null) throw new Error("Unconfigured API: " + keyName);
     return result;
   }
@@ -142,23 +142,23 @@ class ApiHelperClass {
 
 // Force singleton with immediate global assignment
 const getGlobalObject = () => {
-  if (typeof window !== 'undefined') return window;
-  if (typeof global !== 'undefined') return global;
-  if (typeof globalThis !== 'undefined') return globalThis;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  if (typeof globalThis !== "undefined") return globalThis;
   return {};
 };
 
 // Get or create singleton immediately - FORCE SINGLE INSTANCE
 const ensureSingleton = () => {
   const globalObj = getGlobalObject() as any;
-  
+
   // Use a more unique key to avoid conflicts
-  const SINGLETON_KEY = '__CHURCHAPPS_API_HELPER_SINGLETON__';
-  
+  const SINGLETON_KEY = "__CHURCHAPPS_API_HELPER_SINGLETON__";
+
   if (!globalObj[SINGLETON_KEY]) {
     globalObj[SINGLETON_KEY] = new ApiHelperClass();
   }
-  
+
   return globalObj[SINGLETON_KEY];
 };
 

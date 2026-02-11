@@ -7,12 +7,11 @@ export class PersonHelper {
     if (!person.photoUpdated) {
       if (person.id?.startsWith("PER0000")) return "https://app.staging.b1.church/images/demo/avatars/" + person.id + ".svg";
       else return "";
-    }
-    else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + new Date(person.photoUpdated).getTime().toString();
+    } else return "/" + churchId + "/membership/people/" + person.id + ".png?dt=" + new Date(person.photoUpdated).getTime().toString();
   }
 
   static getPhotoUrl(person: PersonInterface) {
-    if (!person?.photo) return "/images/sample-profile.png"
+    if (!person?.photo) return "/images/sample-profile.png";
     else {
       return (person?.photo?.startsWith("data:image/png;base64,") || person.photo?.indexOf("://") > -1)
         ? person.photo
@@ -22,12 +21,11 @@ export class PersonHelper {
 
   static getAge(birthdate: Date): string {
     if (birthdate !== undefined && birthdate !== null) {
-      let ageDifMs = Date.now() - new Date(birthdate).getTime();
-      let ageDate = new Date(ageDifMs);
-      let years = Math.abs(ageDate.getUTCFullYear() - 1970);
+      const ageDifMs = Date.now() - new Date(birthdate).getTime();
+      const ageDate = new Date(ageDifMs);
+      const years = Math.abs(ageDate.getUTCFullYear() - 1970);
       return years + " years";
-    }
-    else return "";
+    } else return "";
   }
 
   public static getDisplayNameFromPerson(person: any) {
@@ -50,13 +48,13 @@ export class PersonHelper {
     const displayAddress2: string = this.addressToString(address2).trim();
 
     if (displayAddress1 !== displayAddress2) {
-      return true
+      return true;
     }
-    return false
+    return false;
   }
 
   public static addressToString(address: ContactInfoInterface): string {
-    return `${address.address1 || ""} ${address.address2 || ""} ${address.city || ""}${(address.city && address.state) ? "," : ""} ${address.state || ""} ${address.zip || ""}`
+    return `${address.address1 || ""} ${address.address2 || ""} ${address.city || ""}${(address.city && address.state) ? "," : ""} ${address.state || ""} ${address.zip || ""}`;
   }
 
   public static changeOnlyAddress(contactInfo1: ContactInfoInterface, contactInfo2: ContactInfoInterface): ContactInfoInterface {
@@ -67,9 +65,9 @@ export class PersonHelper {
       city: contactInfo2.city,
       state: contactInfo2.state,
       zip: contactInfo2.zip
-    }
+    };
 
-    return updatedAddress
+    return updatedAddress;
   }
 
   public static checkAddressAvailabilty(person: PersonInterface): boolean {

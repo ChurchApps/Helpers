@@ -1,5 +1,4 @@
 import { ErrorLogInterface, ErrorAppDataInterface } from "./interfaces/Error.js";
-import { ApiHelper } from "./ApiHelper.js";
 
 
 export class ErrorHelper {
@@ -10,7 +9,7 @@ export class ErrorHelper {
   static init = (getAppData: () => ErrorAppDataInterface, customErrorHandler: (errorLog: ErrorLogInterface) => void) => {
     ErrorHelper.getAppData = getAppData;
     ErrorHelper.customErrorHandler = customErrorHandler;
-  }
+  };
 
   static logError = (errorType: string, message: string, details: string) => {
 
@@ -26,14 +25,14 @@ export class ErrorHelper {
         errorType: errorType,
         message: message,
         details: details
-      }
+      };
 
       if (log.errorType === "401" && log.message.indexOf("/users/login") > -1) return;
       //temporarily disabled error logging
       //ApiHelper.postAnonymous("/errors", [log], "MembershipApi");
       if (ErrorHelper.customErrorHandler) ErrorHelper.customErrorHandler(log);
     }
-  }
+  };
 
 
 }

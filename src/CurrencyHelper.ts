@@ -15,7 +15,7 @@ export class CurrencyHelper {
     const formatter = new Intl.NumberFormat(locale, {
       style: "currency",
       currency: normalizedCurrency,
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 2
     });
     return formatter.format(amount);
   }
@@ -37,7 +37,7 @@ export class CurrencyHelper {
       dkk: { percent: 2.9, fixed: 1.8, symbol: "kr" },
       chf: { percent: 2.9, fixed: 0.3, symbol: "CHF" },
       mxn: { percent: 2.9, fixed: 3.0, symbol: "MXN" },
-      brl: { percent: 3.9, fixed: 0.5, symbol: "R$" },
+      brl: { percent: 3.9, fixed: 0.5, symbol: "R$" }
     };
     return stripeCurrencyFees[normalizedCurrency]?.symbol || "$";
   }
@@ -58,7 +58,7 @@ export class CurrencyHelper {
       DKK: "da-DK",
       CHF: "de-CH",
       MXN: "es-MX",
-      BRL: "pt-BR",
+      BRL: "pt-BR"
     };
 
     return currencyLocaleMap[currency] || "en-US";

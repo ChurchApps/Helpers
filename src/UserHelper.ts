@@ -1,4 +1,4 @@
-import { ApiHelper } from "./ApiHelper.js"
+import { ApiHelper } from "./ApiHelper.js";
 import { UserInterface, UserContextInterface, IApiPermission, PersonInterface, LoginUserChurchInterface } from "./interfaces/index.js";
 
 export class UserHelper {
@@ -15,8 +15,7 @@ export class UserHelper {
       UserHelper.userChurches.forEach(uc => {
         if (uc.church.id === churchId) userChurch = uc;
       });
-    }
-    else if (keyName) UserHelper.userChurches.forEach(uc => { if (uc.church.subDomain === keyName) userChurch = uc; });
+    } else if (keyName) UserHelper.userChurches.forEach(uc => { if (uc.church.subDomain === keyName) userChurch = uc; });
     else userChurch = UserHelper.userChurches[0];
     if (!userChurch) return;
     else {
@@ -28,7 +27,7 @@ export class UserHelper {
         context.setUserChurch(UserHelper.currentUserChurch);
       }
     }
-  }
+  };
 
   static setupApiHelper(userChurch: LoginUserChurchInterface) {
     ApiHelper.setDefaultPermissions(userChurch.jwt);

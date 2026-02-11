@@ -12,14 +12,14 @@ export class FileHelper {
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      xhr.upload.addEventListener('progress', (event) => {
+      xhr.upload.addEventListener("progress", (event) => {
         if (event.lengthComputable) {
           const percent = Math.round((event.loaded / event.total) * 100);
           progressCallback(percent);
         }
       });
 
-      xhr.addEventListener('load', () => {
+      xhr.addEventListener("load", () => {
         if (xhr.status >= 200 && xhr.status < 300) {
           resolve({
             status: xhr.status,
@@ -31,22 +31,24 @@ export class FileHelper {
         }
       });
 
-      xhr.addEventListener('error', () => {
-        reject(new Error('Network error occurred'));
+      xhr.addEventListener("error", () => {
+        reject(new Error("Network error occurred"));
       });
 
-      xhr.open('POST', presigned.url);
+      xhr.open("POST", presigned.url);
       xhr.send(formData);
     });
   };
 
   static dataURLtoBlob(dataurl: string) {
-    let arr = dataurl.split(",");
+    const arr = dataurl.split(",");
     if (arr.length < 2) throw new Error("Invalid data URL format");
-    let mimeMatch = arr[0].match(/:(.*?);/);
+    const mimeMatch = arr[0].match(/:(.*?);/);
     if (!mimeMatch) throw new Error("Invalid MIME type in data URL");
-    let mime = mimeMatch[1];
-    let bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    const mime = mimeMatch[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
     while (n--) {
       u8arr[n] = bstr.charCodeAt(n);
     }

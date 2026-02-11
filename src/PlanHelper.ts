@@ -3,9 +3,7 @@ import type { ContentProviderInterface } from "./contentProviders/ContentProvide
 import { LessonsContentProvider } from "./contentProviders/LessonsContentProvider.js";
 
 export class PlanHelper {
-  private static providers: ContentProviderInterface[] = [
-    new LessonsContentProvider()
-  ];
+  private static providers: ContentProviderInterface[] = [new LessonsContentProvider()];
 
   // Register additional content providers
   static registerProvider(provider: ContentProviderInterface): void {
