@@ -136,4 +136,7 @@ export interface PlanItemInterface {
   children?: PlanItemInterface[];
   content?: PlanItemContentInterface;  // Populated by PlanHelper
   providerId?: string;  // Provider that owns this item's content
+  providerPath?: string;  // Path to fetch instructions from provider
+  providerContentPath?: string;  // Dot-notation path to specific content item (e.g. "0.2.1")
+  thumbnailUrl?: string;
 }
